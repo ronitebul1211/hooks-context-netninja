@@ -19,7 +19,7 @@ import React, { createContext, Component } from "react";
   <ThemeContext.Consumer/>
   Pros: 1. can used class & functional components, 2. multiple consumer for one component
 
-  Let Consumer change state:
+  Let Consumer change context state:
   pass to value property reference to function that set state
  */
 export const ThemeContext = createContext();
