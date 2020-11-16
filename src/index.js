@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import ContextApp from "./ContextApp/ContextApp";
+import HooksApp from "./HooksApp/HooksApp";
 
-ReactDOM.render(<ContextApp />, document.getElementById("root"));
+ReactDOM.render(<HooksApp />, document.getElementById("root"));
