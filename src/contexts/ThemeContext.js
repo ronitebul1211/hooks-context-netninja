@@ -3,11 +3,24 @@ import React, { createContext, Component } from "react";
 /**
  ThemeContextProvider is wrapper for the consumer components tree.
 
- the consumer -> navbar declare in his class -> static contextType = ThemeContext;
- then its look up components tree to the first element hold the provider for these context type -> ThemeContextProvider,
- its take the value property of the ThemeContext.Provider and attach it to component context (Navbar), 
- access by this.context
+ To Consume Context:
+ # class component declare -> static contextType = ThemeContext;
+   its look up components tree to the first element hold the provider for that context type -> ThemeContextProvider,
+   its take the value property of the ThemeContext.Provider and attach it to component context (Navbar), 
+   access by this.context
+ 
+ # wrap component JSX with specific context consumer
+  <ThemeContext.Consumer>
+    {context => {
+      return(
+        Component JSX - can ref context
+      )
+    }}
+  <ThemeContext.Consumer/>
+  Pros: 1. can used class & functional components, 2. multiple consumer for one component
 
+  Let Consumer change state:
+  pass to value property reference to function that set state
  */
 export const ThemeContext = createContext();
 
@@ -18,8 +31,16 @@ class ThemeContextProvider extends Component {
       dark: { text: "#ddd", ui: "#333", bg: "#555" },
    };
 
+   toggleTheme = () => {
+      this.setState({ isLightTheme: !this.state.isLightTheme });
+   };
+
    render() {
-      return <ThemeContext.Provider value={{ ...this.state }}>{this.props.children}</ThemeContext.Provider>;
+      return (
+         <ThemeContext.Provider value={{ ...this.state, toggleTheme: this.toggleTheme }}>
+            {this.props.children}
+         </ThemeContext.Provider>
+      );
    }
 }
 
